@@ -9,7 +9,7 @@ let yelpToken;
 function sendErr(res, err) {
   res.status(500).json({
     success: false,
-    message: err,
+    message: err.message,
   });
 }
 
@@ -31,6 +31,7 @@ function chkYelpToken(req, res, next) {
   }
 }
 
+// Fetch listing from yelp and combine with DB data
 placeRouter.get('/list', chkYelpToken, (req, res) => {
   const location = req.query.location;
 
@@ -54,7 +55,7 @@ placeRouter.get('/list', chkYelpToken, (req, res) => {
             let attendees = [];
             results.forEach((result) => {
               if (place.id === result.yelpId) {
-                attendees = result.attendees;
+                attendees = result.attendeeIds;
               }
             });
 
@@ -73,9 +74,28 @@ placeRouter.get('/list', chkYelpToken, (req, res) => {
       });
     }
   });
+});
 
-  // TODO: match listings with local DB
-  // TODO: return listings
+// Add/remove attending users
+// TODO: restrict to user only
+placeRouter.patch('/join', (req, res) => {
+  const attend = req.body.attend;
+  const placeId = req.body.id;
+  const userId = req.body.userId;
+
+  function handleResults(err, place) {
+    if (err) {
+      sendErr(res, err);
+    } else {
+      res.json(place);
+    }
+  }
+
+  if (attend) {
+    Place.attend(placeId, userId, handleResults);
+  } else {
+    Place.deattend(placeId, userId, handleResults);
+  }
 });
 
 module.exports = placeRouter;

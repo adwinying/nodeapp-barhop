@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
-const userModel = require('./user');
+const userModel = require('./user').model;
 
 const logModel = new Schema({
   yelpId: {

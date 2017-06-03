@@ -2,9 +2,15 @@ const express = require('express');
 const mongodb = require('./config/mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const passport = require('./config/passport');
+
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
-const port = process.env.API_PORT || 8000;
+const port = process.env.PORT || 8080;
+
+// Connect to DB
+mongodb.config();
 
 // CORS mw
 app.use(cors());
@@ -12,11 +18,11 @@ app.use(cors());
 // Body Parser mw
 app.use(bodyParser.json());
 
-// Connect to DB
-mongodb.config();
+// Passport mw
+passport.config(app);
 
 // Routes
-// TODO: add routes
+app.use('/api/auth', authRoutes);
 
 // TODO: replace this with static file
 app.get('/', (req, res) => {

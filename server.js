@@ -3,6 +3,7 @@ const mongodb = require('./config/mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const passport = require('./config/passport');
+const compression = require('compression');
 
 const authRoutes = require('./routes/authRoutes');
 
@@ -14,12 +15,14 @@ mongodb.config();
 
 // CORS mw
 if (process.env.ENV === 'dev') {
-  console.log('cors enabled');
   app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true,
   }));
 }
+
+// Compression mw
+app.use(compression());
 
 // Body Parser mw
 app.use(bodyParser.json());

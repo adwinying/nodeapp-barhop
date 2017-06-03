@@ -6,6 +6,7 @@ const passport = require('./config/passport');
 const compression = require('compression');
 
 const authRoutes = require('./routes/authRoutes');
+const placeRoutes = require('./routes/placeRoutes');
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -32,6 +33,7 @@ passport.config(app);
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/place', placeRoutes);
 
 // TODO: replace this with static file
 app.get('/', (req, res) => {

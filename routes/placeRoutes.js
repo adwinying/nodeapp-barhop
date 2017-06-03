@@ -79,7 +79,7 @@ placeRouter.get('/list', chkYelpToken, (req, res) => {
 // Add/remove attending users
 // TODO: restrict to user only
 placeRouter.patch('/join', (req, res) => {
-  const attend = req.body.attend;
+  const isAttending = req.body.isAttending;
   const placeId = req.body.id;
   const userId = req.body.userId;
 
@@ -91,7 +91,7 @@ placeRouter.patch('/join', (req, res) => {
     }
   }
 
-  if (attend) {
+  if (isAttending) {
     Place.attend(placeId, userId, handleResults);
   } else {
     Place.deattend(placeId, userId, handleResults);

@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
-const userModel = require('./user').model;
 
 const logModel = new Schema({
   yelpId: {
@@ -13,7 +12,8 @@ const logModel = new Schema({
     default: Date.now,
   },
   users: {
-    type: [userModel],
+    type: [String],
+    default: [],
   },
 });
 

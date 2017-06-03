@@ -13,7 +13,13 @@ const port = process.env.PORT || 8080;
 mongodb.config();
 
 // CORS mw
-app.use(cors());
+if (process.env.ENV === 'dev') {
+  console.log('cors enabled');
+  app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  }));
+}
 
 // Body Parser mw
 app.use(bodyParser.json());

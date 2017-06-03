@@ -40,7 +40,6 @@ module.exports.config = (app) => {
 
 // Passport check logged in mw
 module.exports.loggedIn = (req, res, next) => {
-  console.log('check loggedIn');
   if (req.isAuthenticated()) {
     next();
   } else {

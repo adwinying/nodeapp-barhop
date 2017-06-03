@@ -1,6 +1,5 @@
 const express = require('express');
 const mongodb = require('./config/mongoose');
-const cors = require('cors');
 const bodyParser = require('body-parser');
 const passport = require('./config/passport');
 const compression = require('compression');
@@ -13,14 +12,6 @@ const port = process.env.PORT || 8080;
 
 // Connect to DB
 mongodb.config();
-
-// CORS mw
-if (process.env.ENV === 'dev') {
-  app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true,
-  }));
-}
 
 // Compression mw
 app.use(compression());

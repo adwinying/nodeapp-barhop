@@ -4,9 +4,7 @@ import axios from 'axios';
 class App extends Component {
   testAjax() {
     this.asd = '';
-    axios.get('//localhost:3100/api/auth/check', {
-      withCredentials: true,
-    })
+    axios.get('/api/auth/check')
       .then((res) => {
         console.log(res.data);
       })

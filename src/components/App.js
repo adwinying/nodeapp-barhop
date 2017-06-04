@@ -6,11 +6,19 @@ import { fetchPlaces, userInput } from '../actions/placeActions';
 
 import Header from './Header';
 import SearchBar from './SearchBar';
+import PlaceList from './PlaceList';
 import Footer from './Footer';
 
 import '../css/main.css';
 
 class App extends Component {
+
+  componentDidMount() {
+    const { location, dispatch } = this.props;
+    if (location !== '') {
+      dispatch(fetchPlaces(location));
+    }
+  }
 
   handleUserInput = (inputVal) => {
     this.props.dispatch(userInput(inputVal));
@@ -24,7 +32,7 @@ class App extends Component {
   }
 
   render() {
-    const { location, isFetching } = this.props;
+    const { location, isFetching, error } = this.props;
 
     return (
       <div>
@@ -40,6 +48,12 @@ class App extends Component {
             <span className="sr-only">Loading...</span>
           </div>
         }
+        {error &&
+          <div className="error text-center">
+            <h3>Error has occured. Please try again later.</h3>
+          </div>
+        }
+        <PlaceList />
         <Footer />
       </div>
     );
@@ -49,14 +63,20 @@ class App extends Component {
 App.propTypes = {
   location: PropTypes.string.isRequired,
   isFetching: PropTypes.bool.isRequired,
+  error: PropTypes.string,
   dispatch: PropTypes.func.isRequired,
 };
 
+App.defaultProps = {
+  error: null,
+};
+
 const mapStateToProps = (state) => {
-  const { location, isFetching } = state.place;
+  const { location, isFetching, error } = state.place;
   return {
     location,
     isFetching,
+    error,
   };
 };
 

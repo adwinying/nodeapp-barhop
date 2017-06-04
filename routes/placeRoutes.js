@@ -67,7 +67,7 @@ placeRouter.get('/list', chkYelpToken, (req, res) => {
                 url: place.url,
                 imageUrl: place.image_url,
                 location: place.location.city,
-                price: place.price || 'Unknown',
+                price: place.price || '',
                 rating: place.rating,
                 attendees,
               };

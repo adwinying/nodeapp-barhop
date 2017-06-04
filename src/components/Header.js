@@ -10,7 +10,7 @@ export default function Header() {
         &nbsp;
         BarHop
       </h1>
-      <h4>Down to party tonight? Check out spots around you!</h4>
+      <h4>Down to party tonight? Check out the nightlife around you!</h4>
     </div>
   );
 }

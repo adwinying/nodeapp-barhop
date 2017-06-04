@@ -6,11 +6,16 @@ const authRouter = express.Router();
 
 authRouter.get('/login', passport.authenticate('twitter'));
 
-authRouter.get('/callback',
-  passport.authenticate('twitter', {
-    failureRedirect: '/',
-    successRedirect: '/api/auth/check',
-  }));
+authRouter.get(
+  '/callback',
+  passport.authenticate('twitter', { failureRedirect: '/' }),
+  (req, res) => {
+    if (process.env.ENV === 'dev') {
+      res.redirect('http://localhost:3000/');
+    } else {
+      res.redirect('/');
+    }
+  });
 
 authRouter.get('/check', loggedIn, (req, res) => {
   res.json({

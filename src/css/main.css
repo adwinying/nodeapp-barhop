@@ -2,6 +2,31 @@ body {
 	background-color: rgba(44, 62, 80,1.0);
 }
 
+button {
+	width: 100%;
+}
+
+form {
+	margin: 50px 0;
+}
+
 .loading {
 	padding: 0 0 50px;
+}
+
+.place-list-wrapper {
+	padding-bottom: 50px;
+}
+
+.place-img {
+	width: 100%;
+	height: 0;
+	padding-bottom: 100%;
+	background-position: center center;
+	background-size: cover;
+	border: 1px solid #ddd;
+}
+
+.place-status {
+	padding: 15px 0 5px;
 }

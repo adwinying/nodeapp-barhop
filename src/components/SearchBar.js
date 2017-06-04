@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import '../css/searchbar.css';
-
 const SearchBar = ({ location, onChange, onSubmit }) => (
   <div className="container">
     <form className="form-horizontal" onSubmit={onSubmit}>
@@ -17,7 +15,7 @@ const SearchBar = ({ location, onChange, onSubmit }) => (
           />
         </div>
         <div className="col-xs-3">
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-success">
             <i className="fa fa-search" aria-hidden="true" />
           </button>
         </div>

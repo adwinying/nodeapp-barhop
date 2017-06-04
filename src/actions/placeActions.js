@@ -1,9 +1,7 @@
 import axios from 'axios';
 
 export const fetchPlaces = location => (dispatch) => {
-  dispatch({
-    type: 'FETCHING_PLACES',
-  });
+  dispatch({ type: 'FETCHING_PLACES' });
 
   axios.get(`/api/place/list?location=${location}`)
     .then((response) => {

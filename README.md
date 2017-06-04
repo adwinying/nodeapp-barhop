@@ -26,7 +26,7 @@ _**[Restricted]**: APIs require user to be logged in_
 	"userId": "123456", 
 
 	// Yelp ID of place
-	"id": "Moes-bar-san-franciso",
+	"id": "Moes-bar-san-francisco",
 
 	// Attending or de-attending (boolean)
 	"attend": true 

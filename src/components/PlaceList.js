@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import Place from './Place';
 
+import { joinPlace } from '../actions/placeActions';
 import { chkLoggedIn } from '../actions/userActions';
 
 import missingImg from './missing.jpg';
@@ -13,10 +14,8 @@ class PlaceList extends Component {
     this.props.dispatch(chkLoggedIn());
   }
 
-  handleClick = (placeId, isGoing) => {
-    const { isLoggedIn } = this.props;
-    console.log(placeId, isGoing);
-    // TODO: process click
+  handleClick = (placeId, isGoing, index) => {
+    const { isLoggedIn, dispatch } = this.props;
     if (!isLoggedIn) {
       console.log(process.env.ENV);
       if (process.env.NODE_ENV === 'development') {
@@ -24,13 +23,16 @@ class PlaceList extends Component {
       } else {
         window.location = '//barhop.nodeapp.iadw.in/api/auth/login';
       }
+    } else {
+      const { userId } = this.props.user;
+      dispatch(joinPlace(userId, placeId, !isGoing, index));
     }
   }
 
   render() {
     const { places, user, isLoggedIn } = this.props;
 
-    const placeNodes = places.map((place) => {
+    const placeNodes = places.map((place, index) => {
       let isGoing = false;
       const rating = [];
 
@@ -61,6 +63,7 @@ class PlaceList extends Component {
           attendeeCount={place.attendees.length}
           onClick={this.handleClick}
           isGoing={isGoing}
+          index={index}
         />
       );
     });

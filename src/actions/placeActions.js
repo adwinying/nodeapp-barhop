@@ -11,18 +11,15 @@ export const fetchPlaces = location => (dispatch) => {
           payload: response.data.places,
         });
       } else {
-        dispatch({
-          type: 'FETCH_PLACES_REJECTED',
-          payload: response.data.message,
-        });
+        console.error(response.data.message);
+
+        dispatch({ type: 'FETCH_PLACES_REJECTED' });
       }
     })
     .catch((err) => {
       console.error(err);
 
-      dispatch({
-        type: 'FETCH_PLACES_REJECTED',
-      });
+      dispatch({ type: 'FETCH_PLACES_REJECTED' });
     });
 };
 
@@ -30,3 +27,27 @@ export const userInput = inputVal => ({
   type: 'USER_INPUT',
   payload: inputVal,
 });
+
+export const joinPlace = (userId, id, attend, index) => (dispatch) => {
+  dispatch({ type: 'JOINING_PLACE' });
+
+  axios.patch('/api/place/join', { userId, id, attend })
+    .then((response) => {
+      if (response.data.success) {
+        dispatch({
+          type: 'JOIN_PLACE_FULFILLED',
+          payload: {
+            place: response.data.place,
+            index,
+          },
+        });
+      } else {
+        console.error(response.data.message);
+        dispatch({ type: 'JOIN_PLACE_REJECTED' });
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      dispatch({ type: 'JOIN_PLACE_REJECTED' });
+    });
+};

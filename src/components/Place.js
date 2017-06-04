@@ -12,6 +12,7 @@ const Place = ({
   attendeeCount,
   onClick,
   isGoing,
+  index,
 }) => (
   <div className="well">
     <div className="row">
@@ -38,7 +39,7 @@ const Place = ({
         </div>
         <button
           className="btn btn-success"
-          onClick={() => { onClick(id, isGoing); }}
+          onClick={() => { onClick(id, isGoing, index); }}
         >{isGoing ? 'JOINED' : 'JOIN'}</button>
       </div>
     </div>
@@ -56,6 +57,7 @@ Place.propTypes = {
   attendeeCount: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
   isGoing: PropTypes.bool.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default Place;

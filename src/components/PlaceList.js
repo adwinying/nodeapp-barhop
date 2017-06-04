@@ -18,7 +18,12 @@ class PlaceList extends Component {
     console.log(placeId, isGoing);
     // TODO: process click
     if (!isLoggedIn) {
-      window.location.replace('//localhost:3100/api/auth/login');
+      console.log(process.env.ENV);
+      if (process.env.NODE_ENV === 'development') {
+        window.location = '//localhost:3100/api/auth/login';
+      } else {
+        window.location = '//barhop.nodeapp.iadw.in/api/auth/login';
+      }
     }
   }
 
@@ -27,11 +32,20 @@ class PlaceList extends Component {
 
     const placeNodes = places.map((place) => {
       let isGoing = false;
-      // TODO: process rating stuff
+      const rating = [];
+
       if (isLoggedIn) {
         if (place.attendees.indexOf(user.userId) !== -1) {
           isGoing = true;
         }
+      }
+
+      for (let i = 1; i <= place.rating; i += 1) {
+        rating.push(<i className="fa fa-star" aria-hidden="true" key={i} />);
+      }
+
+      if (place.rating !== parseInt(place.rating, 10)) {
+        rating.push(<i className="fa fa-star-half" aria-hidden="true" key="asd" />);
       }
 
       return (
@@ -43,7 +57,7 @@ class PlaceList extends Component {
           imageUrl={place.imageUrl === '' ? missingImg : place.imageUrl}
           location={place.location}
           price={place.price}
-          rating={place.rating}
+          rating={rating}
           attendeeCount={place.attendees.length}
           onClick={this.handleClick}
           isGoing={isGoing}

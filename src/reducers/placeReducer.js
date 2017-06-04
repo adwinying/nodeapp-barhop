@@ -1,7 +1,7 @@
 const initState = {
   places: [],
   isFetching: false,
-  error: null,
+  error: false,
   location: localStorage.getItem('location') || '',
 };
 
@@ -24,7 +24,7 @@ export default function reducer(state = initState, action) {
       return {
         ...state,
         isFetching: false,
-        error: action.payload,
+        error: true,
       };
 
     case 'USER_INPUT':

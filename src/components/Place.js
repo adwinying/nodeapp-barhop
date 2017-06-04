@@ -29,7 +29,7 @@ const Place = ({
           <i>{location}</i>
         </p>
         <p>
-          {rating}/5 {price}
+          {rating} {price}
         </p>
       </div>
       <div className="col-xs-5 col-sm-3">
@@ -52,7 +52,7 @@ Place.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   location: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired,
+  rating: PropTypes.arrayOf(PropTypes.element).isRequired,
   attendeeCount: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
   isGoing: PropTypes.bool.isRequired,

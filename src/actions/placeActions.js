@@ -18,9 +18,10 @@ export const fetchPlaces = location => (dispatch) => {
       }
     })
     .catch((err) => {
+      console.error(err);
+
       dispatch({
         type: 'FETCH_PLACES_REJECTED',
-        payload: err,
       });
     });
 };

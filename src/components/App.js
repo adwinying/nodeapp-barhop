@@ -63,12 +63,8 @@ class App extends Component {
 App.propTypes = {
   location: PropTypes.string.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  error: PropTypes.string,
+  error: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
-};
-
-App.defaultProps = {
-  error: null,
 };
 
 const mapStateToProps = (state) => {

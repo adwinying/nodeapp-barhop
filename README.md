@@ -7,6 +7,7 @@
 	- ReactJS
 	- Node.js
 - Yelp Fusion API
+- ESLint (Airbnb)
 
 ## Backend APIs
 

@@ -51,25 +51,28 @@ placeRouter.get('/list', chkYelpToken, (req, res) => {
         if (err) {
           sendErr(res, dbErr);
         } else {
-          res.json(places.map((place) => {
-            let attendees = [];
-            results.forEach((result) => {
-              if (place.id === result.yelpId) {
-                attendees = result.attendeeIds;
-              }
-            });
+          res.json({
+            success: true,
+            places: places.map((place) => {
+              let attendees = [];
+              results.forEach((result) => {
+                if (place.id === result.yelpId) {
+                  attendees = result.attendeeIds;
+                }
+              });
 
-            return {
-              id: place.id,
-              name: place.name,
-              url: place.url,
-              imageUrl: place.image_url,
-              location: place.location.city,
-              price: place.price || 'Unknown',
-              rating: place.rating,
-              attendees,
-            };
-          }));
+              return {
+                id: place.id,
+                name: place.name,
+                url: place.url,
+                imageUrl: place.image_url,
+                location: place.location.city,
+                price: place.price || 'Unknown',
+                rating: place.rating,
+                attendees,
+              };
+            }),
+          });
         }
       });
     }

@@ -29,9 +29,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/place', placeRoutes);
 
 // redirect all unmatched URLs to main site
-app.get('/', (req, res) => {
-  res.sendfile(path.join(__dirname, '/build/index.html'));
-});
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.all('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/build/index.html'));

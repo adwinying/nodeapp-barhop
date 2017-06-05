@@ -1,8 +1,10 @@
 const express = require('express');
-const mongodb = require('./config/mongoose');
 const bodyParser = require('body-parser');
-const passport = require('./config/passport');
 const compression = require('compression');
+const path = require('path');
+
+const mongodb = require('./config/mongoose');
+const passport = require('./config/passport');
 
 const authRoutes = require('./routes/authRoutes');
 const placeRoutes = require('./routes/placeRoutes');
@@ -26,11 +28,9 @@ passport.config(app);
 app.use('/api/auth', authRoutes);
 app.use('/api/place', placeRoutes);
 
-// TODO: replace this with static file
-app.get('/', (req, res) => {
-  res.json({
-    message: 'API online',
-  });
+// redirect all unmatched URLs to main site
+app.all('*', function(req, res) {
+  res.sendFile(path.join(__dirname, '/build/index.html'));
 });
 
 // Start express server

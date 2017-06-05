@@ -25,7 +25,7 @@ const Place = ({
       </div>
       <div className="col-xs-7 col-sm-5">
         <h3>
-          <a href={url}>{name}</a>
+          <a href={url} target="_blank">{name}</a>
         </h3>
         <p>
           <i>{location}</i>

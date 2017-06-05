@@ -35,7 +35,6 @@
   },
   "scripts": {
     "start": "node server.js",
-    "start-react": "react-scripts start",
     "start-dev": "nf start -p 3000",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

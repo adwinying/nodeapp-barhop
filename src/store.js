@@ -9,10 +9,11 @@ const middleware = applyMiddleware(
   thunk,
 );
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 export default createStore(
   reducer,
-  compose(
+  composeEnhancers(
     middleware,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
   ),
 );

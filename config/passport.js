@@ -6,7 +6,7 @@ const User = require('../models/userModel');
 const options = {
   consumerKey: process.env.TWITTER_CONSUMER_KEY,
   consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-  callbackURL: 'http://localhost:3100/api/auth/callback',
+  callbackURL: '/api/auth/callback',
 };
 
 // Passport config

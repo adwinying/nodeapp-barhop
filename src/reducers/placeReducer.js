@@ -26,6 +26,7 @@ export default function reducer(state = initState, action) {
       return {
         ...state,
         isFetching: false,
+        isJoining: false,
         error: true,
       };
 
@@ -35,9 +36,16 @@ export default function reducer(state = initState, action) {
         location: action.payload,
       };
 
+    case 'JOINING_PLACE':
+      return {
+        ...state,
+        isJoining: true,
+      };
+
     case 'JOIN_PLACE_FULFILLED':
       return {
         ...state,
+        isJoining: false,
         places: [
           ...state.places.slice(0, action.payload.index),
           {

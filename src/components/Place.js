@@ -12,6 +12,7 @@ const Place = ({
   attendeeCount,
   onClick,
   isGoing,
+  isJoining,
   index,
 }) => (
   <div className="well">
@@ -30,7 +31,7 @@ const Place = ({
           <i>{location}</i>
         </p>
         <p>
-          {rating} {price}
+          {rating}&ensp;|&ensp;{price}
         </p>
       </div>
       <div className="col-xs-5 col-sm-3">
@@ -38,9 +39,9 @@ const Place = ({
           <h4>{attendeeCount} Going</h4>
         </div>
         <button
-          className="btn btn-success"
+          className={isJoining ? 'btn btn-success disabled' : 'btn btn-success'}
           onClick={() => { onClick(id, isGoing, index); }}
-        >{isGoing ? 'JOINED' : 'JOIN'}</button>
+        >{isJoining ? 'PROCESSING..' : isGoing ? 'JOINED' : 'JOIN'}</button>
       </div>
     </div>
   </div>
@@ -57,6 +58,7 @@ Place.propTypes = {
   attendeeCount: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
   isGoing: PropTypes.bool.isRequired,
+  isJoining: PropTypes.bool.isRequired,
   index: PropTypes.number.isRequired,
 };
 

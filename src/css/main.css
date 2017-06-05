@@ -30,3 +30,7 @@ form {
 .place-status {
 	padding: 15px 0 5px;
 }
+
+.btn.disabled {
+	pointer-events: none;
+}

@@ -29,7 +29,10 @@ export const userInput = inputVal => ({
 });
 
 export const joinPlace = (userId, id, attend, index) => (dispatch) => {
-  dispatch({ type: 'JOINING_PLACE' });
+  dispatch({
+    type: 'JOINING_PLACE',
+    payload: id,
+  });
 
   axios.patch('/api/place/join', { userId, id, attend })
     .then((response) => {

@@ -30,7 +30,7 @@ class PlaceList extends Component {
   }
 
   render() {
-    const { places, user, isLoggedIn, isJoining } = this.props;
+    const { places, targetPlace, user, isLoggedIn, isJoining } = this.props;
 
     const placeNodes = places.map((place, index) => {
       let isGoing = false;
@@ -63,7 +63,7 @@ class PlaceList extends Component {
           attendeeCount={place.attendees.length}
           onClick={this.handleClick}
           isGoing={isGoing}
-          isJoining={isJoining}
+          isJoining={isJoining && (targetPlace === place.id)}
           index={index}
         />
       );
@@ -88,6 +88,7 @@ PlaceList.propTypes = {
     rating: PropTypes.number.isRequired,
     attendees: PropTypes.arrayOf(PropTypes.number).isRequired,
   })).isRequired,
+  targetPlace: PropTypes.string.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
   isJoining: PropTypes.bool.isRequired,
   user: PropTypes.shape({
@@ -105,11 +106,12 @@ PlaceList.defaultProps = {
 };
 
 const mapStateToProps = (state) => {
-  const { places, isJoining } = state.place;
+  const { places, isJoining, targetPlace } = state.place;
   const { isLoggedIn, user } = state.user;
 
   return {
     places,
+    targetPlace,
     isLoggedIn,
     isJoining,
     user,

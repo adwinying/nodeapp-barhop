@@ -1,5 +1,6 @@
 const initState = {
   places: [],
+  placeTarget: '',
   isFetching: false,
   isJoining: false,
   error: false,
@@ -40,6 +41,7 @@ export default function reducer(state = initState, action) {
       return {
         ...state,
         isJoining: true,
+        placeTarget: action.payload,
       };
 
     case 'JOIN_PLACE_FULFILLED':

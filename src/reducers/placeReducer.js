@@ -41,7 +41,7 @@ export default function reducer(state = initState, action) {
       return {
         ...state,
         isJoining: true,
-        placeTarget: action.payload,
+        targetPlace: action.payload,
       };
 
     case 'JOIN_PLACE_FULFILLED':
